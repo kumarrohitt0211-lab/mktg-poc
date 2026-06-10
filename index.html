@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Artifact Library</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 700px; margin: 60px auto; padding: 0 20px; background: #f8f8f8; }
+    #gate { background: white; border-radius: 12px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align: center; }
+    #library { display: none; }
+    input { border: 1px solid #ddd; border-radius: 8px; padding: 10px 14px; font-size: 15px; width: 200px; margin-right: 8px; }
+    button { background: #5c5ce0; color: white; border: none; border-radius: 8px; padding: 10px 20px; font-size: 15px; cursor: pointer; }
+    .card { background: white; border-radius: 10px; padding: 18px 22px; margin: 12px 0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+    .card a { color: #5c5ce0; font-weight: 500; text-decoration: none; }
+    .card a:hover { text-decoration: underline; }
+    .tag { font-size: 12px; background: #f0f0ff; color: #5c5ce0; padding: 3px 8px; border-radius: 20px; }
+    h1 { margin-bottom: 4px; } p { color: #666; }
+    .error { color: #d44; font-size: 14px; margin-top: 10px; display: none; }
+  </style>
+</head>
+<body>
+
+<div id="gate">
+  <h2>🔒 Artifact Library</h2>
+  <p>Enter password to access</p>
+  <input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter') unlock()">
+  <button onclick="unlock()">Enter</button>
+  <p class="error" id="err">Wrong password</p>
+</div>
+
+<div id="library">
+  <h1>Artifact Library</h1>
+  <p style="color:#888">Click any artifact to open it</p>
+
+  <!-- ADD YOUR ARTIFACTS HERE -->
+  <div class="card">
+    <div>
+      <a href="artifacts/report-1.html" target="_blank">Report 1 — Q2 Analysis</a>
+      <p style="margin:4px 0 0;font-size:13px;color:#999">Added Jun 2025</p>
+    </div>
+    <span class="tag">Report</span>
+  </div>
+
+  <div class="card">
+    <div>
+      <a href="artifacts/dashboard-2.html" target="_blank">Dashboard 2 — NRT Competitive</a>
+      <p style="margin:4px 0 0;font-size:13px;color:#999">Added Jun 2025</p>
+    </div>
+    <span class="tag">Dashboard</span>
+  </div>
+  <!-- END ARTIFACTS -->
+</div>
+
+<script>
+  const PASSWORD = "QPwoEI1098@"; // ← CHANGE THIS
+
+  function unlock() {
+    if (document.getElementById('pw').value === PASSWORD) {
+      sessionStorage.setItem('auth', '1');
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('library').style.display = 'block';
+    } else {
+      document.getElementById('err').style.display = 'block';
+    }
+  }
+
+  if (sessionStorage.getItem('auth') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('library').style.display = 'block';
+  }
+</script>
+</body>
+</html>
